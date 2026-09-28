@@ -31,30 +31,20 @@ RF drone detection with direction finding, and [ATAK-CIV](https://www.civtak.org
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    S1([SDR]) --> A[adsb-module]
-    S2([SDR]) --> B[ais-module]
-    A -->|adsb| M{{Mosquitto}}
-    B -->|ais| M
-    M --> BE[jsignal-be]
-    BE <--> DB[(PostgreSQL)]
-    M -. live .-> FE[jsignal-fe]
-    BE -. history .-> FE
-```
+![Architecture of the JSignal ecosystem](docs/images/jsignal-architecture.svg)
 
 | Repository | Role |
 |------------|------|
 | [adsb-module](https://github.com/jaggornaut/adsb-module) | Decodes Mode S at 1090 MHz, publishes JSON to MQTT |
 | [ais-module](https://github.com/jaggornaut/ais-module) | Decodes AIS on the marine VHF band, publishes JSON to MQTT |
-| [jsignal-be](https://github.com/jaggornaut/jsignal-be) | Records MQTT traffic to PostgreSQL, serves history over REST |
+| [jsignal-be](https://github.com/jaggornaut/jsignal-be) | Records MQTT traffic to TimescaleDB, serves history over REST |
 | [jsignal-fe](https://github.com/jaggornaut/jsignal-fe) | Desktop console: live map, contact table, history playback |
 
 Each component runs standalone, and the receivers work with any MQTT consumer.
 
 ## Quick start
 
-This repo ships the server stack: MQTT broker, PostgreSQL, recorder backend.
+This repo ships the server stack: MQTT broker, TimescaleDB, recorder backend.
 
 ```bash
 git clone https://github.com/jaggornaut/jsignal.git

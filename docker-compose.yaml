@@ -12,7 +12,8 @@ services:
       retries: 10
 
   postgres:
-    image: postgres:16
+    image: timescale/timescaledb:latest-pg16
+    command: postgres -c shared_preload_libraries=timescaledb
     container_name: jsignal-postgres
     environment:
       POSTGRES_DB: jsignal

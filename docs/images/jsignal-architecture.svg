@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 375" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#222"/>
+    </marker>
+    <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto-start-reverse">
+      <path d="M0,0 L7,3 L0,6 z" fill="#222"/>
+    </marker>
+    <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#9c5b3b" stroke-width="0.7" opacity="0.55"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="375" fill="#ffffff"/>
+
+  <!-- sources -->
+  <rect x="36" y="60" width="118" height="48" fill="url(#hatch)" stroke="#9c5b3b" stroke-width="1.3"/>
+  <rect x="36" y="60" width="118" height="48" fill="none" stroke="#9c5b3b" stroke-width="1.3"/>
+  <text x="95" y="82" font-size="13" fill="#222" text-anchor="middle">SDR</text>
+  <text x="95" y="98" font-size="10.5" fill="#5a5650" text-anchor="middle" font-style="italic">1090 MHz</text>
+
+  <rect x="36" y="160" width="118" height="48" fill="url(#hatch)" stroke="#9c5b3b" stroke-width="1.3"/>
+  <rect x="36" y="160" width="118" height="48" fill="none" stroke="#9c5b3b" stroke-width="1.3"/>
+  <text x="95" y="182" font-size="13" fill="#222" text-anchor="middle">SDR</text>
+  <text x="95" y="198" font-size="10.5" fill="#5a5650" text-anchor="middle" font-style="italic">162 MHz</text>
+
+  <!-- C++ modules -->
+  <rect x="206" y="60" width="150" height="48" fill="#ffffff" stroke="#9c5b3b" stroke-width="1.3"/>
+  <text x="281" y="88" font-size="13" fill="#222" text-anchor="middle">adsb-module</text>
+
+  <rect x="206" y="160" width="150" height="48" fill="#ffffff" stroke="#9c5b3b" stroke-width="1.3"/>
+  <text x="281" y="188" font-size="13" fill="#222" text-anchor="middle">ais-module</text>
+
+  <!-- broker -->
+  <rect x="406" y="70" width="120" height="128" fill="#ffffff" stroke="#222" stroke-width="1.3"/>
+  <text x="466" y="139" font-size="13.5" fill="#222" text-anchor="middle">Mosquitto</text>
+
+  <!-- backend -->
+  <rect x="580" y="238" width="150" height="48" fill="#ffffff" stroke="#40607f" stroke-width="1.3"/>
+  <text x="655" y="266" font-size="13" fill="#222" text-anchor="middle">jsignal-be</text>
+
+  <!-- database cylinder -->
+  <g stroke="#222" stroke-width="1.2" fill="#ffffff">
+    <ellipse cx="655" cy="312" rx="58" ry="10"/>
+    <path d="M597 312 V352" /><path d="M713 312 V352"/>
+    <path d="M597 352 A58 10 0 0 0 713 352" fill="none"/>
+  </g>
+  <text x="655" y="338" font-size="12" fill="#222" text-anchor="middle">TimescaleDB</text>
+
+  <!-- frontend -->
+  <rect x="740" y="60" width="120" height="48" fill="#ffffff" stroke="#40607f" stroke-width="1.3"/>
+  <text x="800" y="88" font-size="13" fill="#222" text-anchor="middle">jsignal-fe</text>
+
+  <!-- sources -> modules -->
+  <line x1="154" y1="84"  x2="202" y2="84"  stroke="#222" stroke-width="1" marker-end="url(#a)"/>
+  <line x1="154" y1="184" x2="202" y2="184" stroke="#222" stroke-width="1" marker-end="url(#a)"/>
+
+  <!-- modules -> broker -->
+  <line x1="356" y1="84"  x2="402" y2="100" stroke="#222" stroke-width="1" marker-end="url(#a)"/>
+  <line x1="356" y1="184" x2="402" y2="168" stroke="#222" stroke-width="1" marker-end="url(#a)"/>
+
+  <!-- broker -> fe (live, dashed) -->
+  <line x1="526" y1="84" x2="736" y2="84" stroke="#222" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#a)"/>
+  <text x="631" y="78" font-size="10.5" fill="#5a5650" text-anchor="middle" font-style="italic">live</text>
+
+  <!-- broker -> be -->
+  <polyline points="526,160 553,160 553,262 576,262" fill="none" stroke="#222" stroke-width="1" marker-end="url(#a)"/>
+
+  <!-- be <-> db -->
+  <line x1="655" y1="286" x2="655" y2="300" stroke="#222" stroke-width="1" marker-start="url(#a2)" marker-end="url(#a)"/>
+
+  <!-- be -> fe (history) -->
+  <polyline points="730,255 800,255 800,112" fill="none" stroke="#222" stroke-width="1" marker-end="url(#a)"/>
+  <text x="808" y="185" font-size="10.5" fill="#5a5650" text-anchor="start" font-style="italic">history</text>
+</svg>
